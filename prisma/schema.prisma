@@ -1,0 +1,37 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Poster {
+  id          String     @id @default(uuid())
+  title       String
+  description String?
+  price       Int
+  imageUrl    String
+  fileUrl     String
+  category    String?
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  purchases   Purchase[]
+}
+
+model Purchase {
+  id              String    @id @default(uuid())
+  posterId        String
+  poster          Poster    @relation(fields: [posterId], references: [id])
+  customerEmail   String
+  stripeSessionId String    @unique
+  downloadToken   String    @unique
+  downloadedAt    DateTime?
+  createdAt       DateTime  @default(now())
+}
