@@ -146,14 +146,13 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <Card>
-        <CardContent className="pt-6 space-y-6">
-          {error && (
-            <div className="bg-destructive/10 border border-destructive/50 text-destructive px-4 py-3 rounded-lg text-sm">
-              {error}
-            </div>
-          )}
+    <form onSubmit={handleSubmit} className="w-full">
+      <div className="space-y-6">
+        {error && (
+          <div className="bg-destructive/10 border border-destructive/50 text-destructive px-4 py-3 rounded-lg text-sm">
+            {error}
+          </div>
+        )}
 
           <div className="space-y-2">
             <Label htmlFor="title">Title *</Label>
