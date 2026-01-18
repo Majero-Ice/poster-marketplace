@@ -51,7 +51,7 @@ export function CartItemCard({ item, onIncrement, onDecrement, onRemove }: CartI
           
           <button
             onClick={() => onRemove(item.posterId)}
-            className="text-destructive hover:text-destructive/80 text-sm transition-colors w-fit"
+            className="text-destructive hover:text-destructive/80 text-red-700 text-sm transition-colors w-fit"
           >
             Remove
           </button>
