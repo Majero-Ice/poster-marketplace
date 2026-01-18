@@ -38,7 +38,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
     if (file) {
       const maxSize = 30 * 1024 * 1024;
       if (file.size > maxSize) {
-        toast.error("Image must be less than 20MB");
+        toast.error("Image must be less than 30MB");
         e.target.value = "";
         return;
       }
@@ -60,14 +60,14 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
       
       const imageFile = formData.get("image") as File;
       const posterFile = formData.get("file") as File;
-      const maxSize = 20 * 1024 * 1024;
+      const maxSize = 30 * 1024 * 1024;
 
       if (imageFile && imageFile.size > 0 && imageFile.size > maxSize) {
-        throw new Error("Image file must be less than 20MB");
+        throw new Error("Image file must be less than 30MB");
       }
 
       if (posterFile && posterFile.size > 0 && posterFile.size > maxSize) {
-        throw new Error("Poster file must be less than 20MB");
+        throw new Error("Poster file must be less than 30MB");
       }
 
       let imageUrl = poster?.imageUrl;
