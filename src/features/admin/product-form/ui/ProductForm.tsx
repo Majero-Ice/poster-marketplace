@@ -35,6 +35,12 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const maxSize = 3 * 1024 * 1024;
+      if (file.size > maxSize) {
+        toast.error("Image must be less than 3MB");
+        e.target.value = "";
+        return;
+      }
       const reader = new FileReader();
       reader.onloadend = () => {
         setImagePreview(reader.result as string);
@@ -50,6 +56,18 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
 
     try {
       const formData = new FormData(e.currentTarget);
+      
+      const imageFile = formData.get("image") as File;
+      const posterFile = formData.get("file") as File;
+      const maxSize = 3 * 1024 * 1024;
+
+      if (imageFile && imageFile.size > 0 && imageFile.size > maxSize) {
+        throw new Error("Image file must be less than 3MB");
+      }
+
+      if (posterFile && posterFile.size > 0 && posterFile.size > maxSize) {
+        throw new Error("Poster file must be less than 3MB");
+      }
       
       const priceValue = formData.get("priceInDollars") as string;
       const priceInCents = Math.round(parseFloat(priceValue) * 100);
@@ -158,6 +176,9 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               onChange={handleImageChange}
               required={!isEdit}
             />
+            <p className="text-xs text-muted-foreground">
+              Maximum size: 3MB. Recommended: JPG/PNG, 1200x1600px
+            </p>
             {imagePreview && (
               <div className="mt-4 relative w-48 h-48 rounded-lg overflow-hidden border">
                 <Image
@@ -180,8 +201,8 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               type="file"
               required={!isEdit}
             />
-            <p className="text-sm text-muted-foreground">
-              High-resolution version for customer download
+            <p className="text-xs text-muted-foreground">
+              High-resolution version for customer download. Maximum size: 3MB
             </p>
           </div>
 
