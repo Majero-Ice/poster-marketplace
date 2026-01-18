@@ -2,7 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/shared/lib/prisma";
 import { getSession } from "@/shared/lib/auth";
-import { uploadFile } from "@/shared/lib/storage";
 
 export async function POST(req: NextRequest) {
   try {
@@ -11,33 +10,15 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const formData = await req.formData();
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const price = parseInt(formData.get("price") as string);
-    const category = formData.get("category") as string;
-    const imageFile = formData.get("image") as File;
-    const posterFile = formData.get("file") as File;
+    const body = await req.json();
+    const { title, description, price, category, imageUrl, fileUrl } = body;
 
-    if (!title || !price || !imageFile || !posterFile) {
+    if (!title || !price || !imageUrl || !fileUrl) {
       return NextResponse.json(
         { error: "Missing required fields" },
         { status: 400 }
       );
     }
-
-    const imageExt = imageFile.name.split(".").pop();
-    const fileExt = posterFile.name.split(".").pop();
-    const timestamp = Date.now();
-    const slug = title.toLowerCase().replace(/\s+/g, "-");
-
-    const imagePath = `images/${slug}-${timestamp}.${imageExt}`;
-    const filePath = `files/${slug}-${timestamp}.${fileExt}`;
-
-    const [imageUrl, fileUrl] = await Promise.all([
-      uploadFile(imageFile, "posters", imagePath),
-      uploadFile(posterFile, "posters", filePath),
-    ]);
 
     const poster = await prisma.poster.create({
       data: {
@@ -46,7 +27,7 @@ export async function POST(req: NextRequest) {
         price,
         category,
         imageUrl,
-        fileUrl: filePath,
+        fileUrl,
       },
     });
 

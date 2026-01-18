@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { revalidatePath } from "next/cache";
 import { prisma } from "@/shared/lib/prisma";
 import { getSession } from "@/shared/lib/auth";
-import { uploadFile, deleteFile } from "@/shared/lib/storage";
+import { deleteFile } from "@/shared/lib/storage";
 
 export async function PUT(
   req: NextRequest,
@@ -15,14 +15,9 @@ export async function PUT(
     }
 
     const { id } = await params;
-    const formData = await req.formData();
+    const body = await req.json();
     
-    const title = formData.get("title") as string;
-    const description = formData.get("description") as string;
-    const price = parseInt(formData.get("price") as string);
-    const category = formData.get("category") as string;
-    const imageFile = formData.get("image") as File | null;
-    const posterFile = formData.get("file") as File | null;
+    const { title, description, price, category, imageUrl, fileUrl } = body;
 
     const existingPoster = await prisma.poster.findUnique({
       where: { id },
@@ -30,28 +25,6 @@ export async function PUT(
 
     if (!existingPoster) {
       return NextResponse.json({ error: "Product not found" }, { status: 404 });
-    }
-
-    let imageUrl = existingPoster.imageUrl;
-    let fileUrl = existingPoster.fileUrl;
-
-    if (imageFile && imageFile.size > 0) {
-      const imageExt = imageFile.name.split(".").pop();
-      const timestamp = Date.now();
-      const slug = title.toLowerCase().replace(/\s+/g, "-");
-      const imagePath = `images/${slug}-${timestamp}.${imageExt}`;
-      
-      imageUrl = await uploadFile(imageFile, "posters", imagePath);
-    }
-
-    if (posterFile && posterFile.size > 0) {
-      const fileExt = posterFile.name.split(".").pop();
-      const timestamp = Date.now();
-      const slug = title.toLowerCase().replace(/\s+/g, "-");
-      const filePath = `files/${slug}-${timestamp}.${fileExt}`;
-      
-      fileUrl = filePath;
-      await uploadFile(posterFile, "posters", filePath);
     }
 
     const poster = await prisma.poster.update({

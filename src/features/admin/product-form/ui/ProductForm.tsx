@@ -8,6 +8,7 @@ import { Label } from "@/shared/ui/label";
 import { Card, CardContent } from "@/shared/ui/card";
 import Image from "next/image";
 import { toast } from "sonner";
+import { uploadFileToSupabase } from "@/shared/lib/uploadToSupabase";
 
 type Poster = {
   id: string;
@@ -35,9 +36,9 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const maxSize = 3 * 1024 * 1024;
+      const maxSize = 20 * 1024 * 1024;
       if (file.size > maxSize) {
-        toast.error("Image must be less than 3MB");
+        toast.error("Image must be less than 20MB");
         e.target.value = "";
         return;
       }
@@ -59,29 +60,67 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
       
       const imageFile = formData.get("image") as File;
       const posterFile = formData.get("file") as File;
-      const maxSize = 3 * 1024 * 1024;
+      const maxSize = 20 * 1024 * 1024;
 
       if (imageFile && imageFile.size > 0 && imageFile.size > maxSize) {
-        throw new Error("Image file must be less than 3MB");
+        throw new Error("Image file must be less than 20MB");
       }
 
       if (posterFile && posterFile.size > 0 && posterFile.size > maxSize) {
-        throw new Error("Poster file must be less than 3MB");
+        throw new Error("Poster file must be less than 20MB");
+      }
+
+      let imageUrl = poster?.imageUrl;
+      let fileUrl = poster?.fileUrl;
+
+      if (imageFile && imageFile.size > 0) {
+        toast.info("Uploading image...");
+        const timestamp = Date.now();
+        const title = formData.get("title") as string;
+        const slug = title.toLowerCase().replace(/\s+/g, "-");
+        const imageExt = imageFile.name.split(".").pop();
+        const imagePath = `images/${slug}-${timestamp}.${imageExt}`;
+        
+        imageUrl = await uploadFileToSupabase(imageFile, "posters", imagePath);
+      }
+
+      if (posterFile && posterFile.size > 0) {
+        toast.info("Uploading poster file...");
+        const timestamp = Date.now();
+        const title = formData.get("title") as string;
+        const slug = title.toLowerCase().replace(/\s+/g, "-");
+        const fileExt = posterFile.name.split(".").pop();
+        const filePath = `files/${slug}-${timestamp}.${fileExt}`;
+        
+        const filePublicUrl = await uploadFileToSupabase(posterFile, "posters", filePath);
+        fileUrl = filePath;
       }
       
       const priceValue = formData.get("priceInDollars") as string;
       const priceInCents = Math.round(parseFloat(priceValue) * 100);
-      formData.set("price", priceInCents.toString());
-      formData.delete("priceInDollars");
+
+      const productData = {
+        title: formData.get("title") as string,
+        description: formData.get("description") as string,
+        price: priceInCents,
+        category: formData.get("category") as string,
+        imageUrl: imageUrl!,
+        fileUrl: fileUrl!,
+      };
 
       const url = isEdit
         ? `/api/admin/products/${poster?.id}`
         : "/api/admin/products";
       const method = isEdit ? "PUT" : "POST";
 
+      toast.info("Saving product...");
+
       const res = await fetch(url, {
         method,
-        body: formData,
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(productData),
       });
 
       if (!res.ok) {
@@ -177,7 +216,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               required={!isEdit}
             />
             <p className="text-xs text-muted-foreground">
-              Maximum size: 3MB. Recommended: JPG/PNG, 1200x1600px
+              Maximum size: 20MB. Recommended: JPG/PNG, 1200x1600px
             </p>
             {imagePreview && (
               <div className="mt-4 relative w-48 h-48 rounded-lg overflow-hidden border">
@@ -202,7 +241,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               required={!isEdit}
             />
             <p className="text-xs text-muted-foreground">
-              High-resolution version for customer download. Maximum size: 3MB
+              High-resolution version for customer download. Maximum size: 20MB
             </p>
           </div>
 
