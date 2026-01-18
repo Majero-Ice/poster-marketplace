@@ -145,7 +145,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
   };
 
   return (
-    <form onSubmit={handleSubmit} className="w-full">
+    <form onSubmit={handleSubmit}>
       <div className="space-y-6">
         {error && (
           <div className="bg-destructive/10 border border-destructive/50 text-destructive px-4 py-3 rounded-lg text-sm">

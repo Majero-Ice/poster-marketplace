@@ -22,12 +22,14 @@ export default async function EditProductPage({
 
   return (
     <div className="p-8">
-      <div className="mb-8">
+      <div className="mb-8 max-w-5xl">
         <h1 className="text-3xl font-bold">Edit Product</h1>
         <p className="text-muted-foreground mt-2">Update product information</p>
       </div>
 
-      <ProductForm poster={product} isEdit />
+      <div className="max-w-5xl">
+        <ProductForm poster={product} isEdit />
+      </div>
     </div>
   );
 }
