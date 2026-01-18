@@ -27,9 +27,7 @@ export default async function EditProductPage({
         <p className="text-muted-foreground mt-2">Update product information</p>
       </div>
 
-      <div className="max-w-3xl">
-        <ProductForm poster={product} isEdit />
-      </div>
+      <ProductForm poster={product} isEdit />
     </div>
   );
 }
