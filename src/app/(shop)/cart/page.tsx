@@ -65,7 +65,6 @@ export default function CartPage() {
                 <span className="text-primary">${(totalPrice / 100).toFixed(2)}</span>
               </div>
             </div>
-
             <button
               onClick={handleCheckout}
               disabled={items.length === 0 || isCheckingOut}
