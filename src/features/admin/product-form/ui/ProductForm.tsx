@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/shared/ui/button";
 import { Input } from "@/shared/ui/input";
 import { Label } from "@/shared/ui/label";
-import { Card, CardContent } from "@/shared/ui/card";
 import Image from "next/image";
 import { toast } from "sonner";
 import { uploadFileToSupabase } from "@/shared/lib/uploadToSupabase";
@@ -244,24 +243,23 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
             </p>
           </div>
 
-          <div className="flex gap-4 pt-4 ">
-            <Button className="hover:bg-neutral-900 active:scale-95 group" type="submit" disabled={isLoading}>
-              {isLoading
-                ? "Saving..."
-                : isEdit
-                ? "Update Product"
-                : "Create Product"}
-            </Button>
-            <Button
-              className="hover:bg-neutral-900 active:scale-95 group"
-              type="button"
-              onClick={() => router.push("/admin/products")}
-            >
-              Cancel
-            </Button>
-          </div>
-        </CardContent>
-      </Card>
+        <div className="flex gap-4 pt-4">
+          <Button className="hover:bg-neutral-900 active:scale-95 group" type="submit" disabled={isLoading}>
+            {isLoading
+              ? "Saving..."
+              : isEdit
+              ? "Update Product"
+              : "Create Product"}
+          </Button>
+          <Button
+            className="hover:bg-neutral-900 active:scale-95 group"
+            type="button"
+            onClick={() => router.push("/admin/products")}
+          >
+            Cancel
+          </Button>
+        </div>
+      </div>
     </form>
   );
 }
