@@ -71,6 +71,7 @@ const posters = [
 async function main() {
   console.log("Seeding database...");
 
+  await prisma.purchase.deleteMany();
   await prisma.poster.deleteMany();
   await prisma.admin.deleteMany();
 
