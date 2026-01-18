@@ -15,10 +15,15 @@ const createPrismaClient = () => {
   }
 
   try {
-    const pool = globalForPrisma.pool ?? new Pool({ 
+    const poolConfig = {
       connectionString,
       ssl: connectionString.includes("supabase.co") ? { rejectUnauthorized: false } : undefined,
-    });
+      max: connectionString.includes("pgbouncer=true") ? 1 : 10,
+      connectionTimeoutMillis: 10000,
+      idleTimeoutMillis: 30000,
+    };
+
+    const pool = globalForPrisma.pool ?? new Pool(poolConfig);
     const adapter = new PrismaPg(pool);
 
     const client = new PrismaClient({
