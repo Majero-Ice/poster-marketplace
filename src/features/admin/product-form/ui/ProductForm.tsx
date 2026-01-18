@@ -36,7 +36,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
-      const maxSize = 20 * 1024 * 1024;
+      const maxSize = 30 * 1024 * 1024;
       if (file.size > maxSize) {
         toast.error("Image must be less than 20MB");
         e.target.value = "";
@@ -216,7 +216,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               required={!isEdit}
             />
             <p className="text-xs text-muted-foreground">
-              Maximum size: 20MB. Recommended: JPG/PNG, 1200x1600px
+              Maximum size: 30MB. Recommended: JPG/PNG, 1200x1600px
             </p>
             {imagePreview && (
               <div className="mt-4 relative w-48 h-48 rounded-lg overflow-hidden border">
@@ -241,7 +241,7 @@ export function ProductForm({ poster, isEdit = false }: ProductFormProps) {
               required={!isEdit}
             />
             <p className="text-xs text-muted-foreground">
-              High-resolution version for customer download. Maximum size: 20MB
+              High-resolution version for customer download. Maximum size: 30MB
             </p>
           </div>
 
