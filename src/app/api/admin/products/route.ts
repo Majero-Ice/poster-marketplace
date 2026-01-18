@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/shared/lib/prisma";
 import { getSession } from "@/shared/lib/auth";
 import { uploadFile } from "@/shared/lib/storage";
@@ -48,6 +49,9 @@ export async function POST(req: NextRequest) {
         fileUrl: filePath,
       },
     });
+
+    revalidatePath('/');
+    revalidatePath('/admin/products');
 
     return NextResponse.json(poster);
   } catch (error) {

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { revalidatePath } from "next/cache";
 import { prisma } from "@/shared/lib/prisma";
 import { getSession } from "@/shared/lib/auth";
 import { uploadFile, deleteFile } from "@/shared/lib/storage";
@@ -65,6 +66,9 @@ export async function PUT(
       },
     });
 
+    revalidatePath('/');
+    revalidatePath('/admin/products');
+
     return NextResponse.json(poster);
   } catch (error) {
     console.error("Update product error:", error);
@@ -104,6 +108,9 @@ export async function DELETE(
     await prisma.poster.delete({
       where: { id },
     });
+
+    revalidatePath('/');
+    revalidatePath('/admin/products');
 
     return NextResponse.json({ success: true });
   } catch (error) {
