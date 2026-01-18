@@ -1,4 +1,5 @@
-import { Poster, PosterCard } from "@/entities/poster";
+import { PosterCard } from "@/entities/poster/ui/PosterCard";
+import type { Poster } from "@/entities/poster/model/types";
 
 interface PosterGridProps {
   posters: Poster[];

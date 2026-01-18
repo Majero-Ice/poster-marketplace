@@ -2,6 +2,7 @@ import "dotenv/config";
 import { PrismaClient } from "@prisma/client";
 import { PrismaPg } from "@prisma/adapter-pg";
 import { Pool } from "pg";
+import bcrypt from "bcryptjs";
 
 const connectionString = process.env.DATABASE_URL;
 
@@ -71,6 +72,7 @@ async function main() {
   console.log("Seeding database...");
 
   await prisma.poster.deleteMany();
+  await prisma.admin.deleteMany();
 
   await prisma.poster.createMany({
     data: posters,
@@ -78,6 +80,16 @@ async function main() {
   });
 
   console.log(`Created ${posters.length} posters`);
+
+  const passwordHash = await bcrypt.hash("admin123", 10);
+  await prisma.admin.create({
+    data: {
+      email: "admin@postermart.com",
+      passwordHash,
+    },
+  });
+
+  console.log("Created admin user (admin@postermart.com / admin123)");
   console.log("Database seeded successfully!");
 }
 

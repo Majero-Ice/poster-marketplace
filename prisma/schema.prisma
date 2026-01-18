@@ -20,6 +20,7 @@ model Poster {
   imageUrl    String
   fileUrl     String
   category    String?
+  isActive    Boolean    @default(true)
   createdAt   DateTime   @default(now())
   updatedAt   DateTime   @updatedAt
   purchases   Purchase[]
@@ -30,8 +31,19 @@ model Purchase {
   posterId        String
   poster          Poster    @relation(fields: [posterId], references: [id])
   customerEmail   String
-  stripeSessionId String    @unique
+  stripeSessionId String
   downloadToken   String    @unique
+  quantity        Int       @default(1)
+  priceAtPurchase Int       @default(0)
   downloadedAt    DateTime?
   createdAt       DateTime  @default(now())
+
+  @@index([stripeSessionId])
+}
+
+model Admin {
+  id           String   @id @default(uuid())
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
 }
