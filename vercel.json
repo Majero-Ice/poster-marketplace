@@ -3,11 +3,5 @@
   "devCommand": "npm run dev",
   "installCommand": "npm install",
   "framework": "nextjs",
-  "regions": ["iad1"],
-  "functions": {
-    "api/admin/products/**": {
-      "maxDuration": 60,
-      "memory": 1024
-    }
-  }
+  "regions": ["iad1"]
 }
