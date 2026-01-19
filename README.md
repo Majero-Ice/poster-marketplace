@@ -23,7 +23,9 @@ A modern e-commerce platform for selling digital art posters. Users can browse, 
 
 <!-- TODO: Replace with actual GIF (15-30 sec, showing: browse → add to cart → checkout) -->
 <p align="center">
-  <img src="docs/assets/demo.gif" alt="PosterMart Demo" width="800" />
+    <a href="https://youtu.be/qwLN1og6HL4">
+  <img src="docs/assets/preview.jpg" alt="Watch Demo" width="800" />
+</a>
 </p>
 
 <!-- TODO: Optional - Link to full video demo -->
@@ -60,7 +62,6 @@ A modern e-commerce platform for selling digital art posters. Users can browse, 
 <summary>📸 Click to view screenshots</summary>
 
 ### Homepage & Catalog
-<<<<<<< HEAD
 <img src="docs/assets/screenshots/homepage.jpg" alt="Homepage" width="800" />
 
 
@@ -78,31 +79,6 @@ A modern e-commerce platform for selling digital art posters. Users can browse, 
 
 ### Admin — Product Management
 <img src="docs/assets/screenshots/admin-products.png" alt="Admin Products" width="800" />
-=======
-<!-- <img src="docs/assets/screenshots/homepage.png" alt="Homepage" width="800" /> -->
-`docs/assets/screenshots/homepage.png`
-
-### Product Page
-<!-- <img src="docs/assets/screenshots/product.png" alt="Product Page" width="800" /> -->
-`docs/assets/screenshots/product.png`
-
-### Shopping Cart
-<!-- <img src="docs/assets/screenshots/cart.png" alt="Shopping Cart" width="800" /> -->
-`docs/assets/screenshots/cart.png`
-
-### Checkout (Stripe)
-<!-- <img src="docs/assets/screenshots/checkout.png" alt="Stripe Checkout" width="800" /> -->
-`docs/assets/screenshots/checkout.png`
-
-### Admin Dashboard
-<!-- <img src="docs/assets/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="800" /> -->
-`docs/assets/screenshots/admin-dashboard.png`
-
-### Admin — Product Management
-<!-- <img src="docs/assets/screenshots/admin-products.png" alt="Admin Products" width="800" /> -->
-`docs/assets/screenshots/admin-products.png`
->>>>>>> 805c0f73c562d728ca4e33cda1aa4467ed0f459a
-
 </details>
 
 ---
