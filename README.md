@@ -24,7 +24,7 @@ A modern e-commerce platform for selling digital art posters. Users can browse, 
 <!-- TODO: Replace with actual GIF (15-30 sec, showing: browse → add to cart → checkout) -->
 <p align="center">
     <a href="https://youtu.be/qwLN1og6HL4">
-  <img src="docs/assets/preview.jpg" alt="Watch Demo" width="800" />
+  <img src="docs/assets/screenshots/preview.jpg" alt="Watch Demo" width="800" />
 </a>
 </p>
 
