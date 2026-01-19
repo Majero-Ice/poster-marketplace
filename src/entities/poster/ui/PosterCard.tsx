@@ -82,7 +82,7 @@ export function PosterCard({ poster, className }: PosterCardProps) {
             {poster.title}
           </h3>
           <div className="flex items-center justify-between">
-            <p className="text-2xl font-bold bg-linear-to-r from-primary to-primary/70 bg-clip-text text-transparent">
+            <p className="text-2xl font-bold bg-linear-to-r from-primary to-primary/70 bg-white bg-clip-text text-transparent">
               {formatPrice(poster.price)}
             </p>
             <span className="text-xs text-muted-foreground group-hover:text-primary transition-colors">
