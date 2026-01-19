@@ -1,17 +1,136 @@
-# Digital Posters Marketplace
+# 🖼️ PosterMart — Digital Posters Marketplace
 
-A marketplace for selling digital art posters built with Next.js, TypeScript, Tailwind CSS, Prisma, Supabase, and Stripe.
+A modern e-commerce platform for selling digital art posters. Users can browse, search, add to cart, and purchase high-resolution artwork with instant digital delivery.
+
+<p align="center">
+  <a href="#demo">View Demo</a> •
+  <a href="#features">Features</a> •
+  <a href="#screenshots">Screenshots</a> •
+  <a href="#tech-stack">Tech Stack</a> •
+  <a href="#getting-started">Getting Started</a>
+</p>
+
+<!-- TODO: Replace with your deployed URL -->
+<p align="center">
+  <a href="https://your-demo-url.vercel.app">
+    <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge" alt="Live Demo" />
+  </a>
+</p>
+
+---
+
+## Demo
+
+<!-- TODO: Replace with actual GIF (15-30 sec, showing: browse → add to cart → checkout) -->
+<p align="center">
+  <img src="docs/assets/demo.gif" alt="PosterMart Demo" width="800" />
+</p>
+
+<!-- TODO: Optional - Link to full video demo -->
+<!-- 
+<p align="center">
+  <a href="https://youtube.com/your-video">▶️ Watch full demo (2 min)</a>
+</p>
+-->
+
+---
+
+## Features
+
+### 🛍️ Customer Experience
+- **Product Catalog** — Browse posters in a responsive grid layout
+- **Search** — Find posters by title, description, or category
+- **Shopping Cart** — Add items, adjust quantities, persistent across sessions
+- **Secure Checkout** — Stripe integration with test/live mode support
+- **Instant Delivery** — Download links generated immediately after purchase
+
+### 🔐 Admin Panel
+- **Dashboard** — Sales statistics and overview
+- **Product Management** — Add, edit, delete posters
+- **File Uploads** — Image and downloadable file storage via Supabase
+- **Order Tracking** — View all purchases and customer details
+
+---
+
+## Screenshots
+
+<!-- TODO: Add actual screenshots (recommended: 4-6 images) -->
+
+<details>
+<summary>📸 Click to view screenshots</summary>
+
+### Homepage & Catalog
+<!-- <img src="docs/assets/screenshots/homepage.png" alt="Homepage" width="800" /> -->
+`docs/assets/screenshots/homepage.png`
+
+### Product Page
+<!-- <img src="docs/assets/screenshots/product.png" alt="Product Page" width="800" /> -->
+`docs/assets/screenshots/product.png`
+
+### Shopping Cart
+<!-- <img src="docs/assets/screenshots/cart.png" alt="Shopping Cart" width="800" /> -->
+`docs/assets/screenshots/cart.png`
+
+### Checkout (Stripe)
+<!-- <img src="docs/assets/screenshots/checkout.png" alt="Stripe Checkout" width="800" /> -->
+`docs/assets/screenshots/checkout.png`
+
+### Admin Dashboard
+<!-- <img src="docs/assets/screenshots/admin-dashboard.png" alt="Admin Dashboard" width="800" /> -->
+`docs/assets/screenshots/admin-dashboard.png`
+
+### Admin — Product Management
+<!-- <img src="docs/assets/screenshots/admin-products.png" alt="Admin Products" width="800" /> -->
+`docs/assets/screenshots/admin-products.png`
+
+</details>
+
+---
 
 ## Tech Stack
 
-- **Framework:** Next.js 14+ (App Router)
-- **Language:** TypeScript (strict mode)
-- **Styling:** Tailwind CSS + shadcn/ui
-- **Architecture:** Feature-Sliced Design (FSD)
-- **Database:** Supabase (PostgreSQL)
-- **ORM:** Prisma
-- **Payments:** Stripe Checkout + Webhooks
-- **Storage:** Supabase Storage
+<p align="center">
+  <img src="https://img.shields.io/badge/Next.js-000000?style=for-the-badge&logo=next.js&logoColor=white" alt="Next.js" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind" />
+  <img src="https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=prisma&logoColor=white" alt="Prisma" />
+  <img src="https://img.shields.io/badge/Supabase-3ECF8E?style=for-the-badge&logo=supabase&logoColor=white" alt="Supabase" />
+  <img src="https://img.shields.io/badge/Stripe-008CDD?style=for-the-badge&logo=stripe&logoColor=white" alt="Stripe" />
+</p>
+
+| Category | Technology |
+|----------|------------|
+| Framework | Next.js 14+ (App Router) |
+| Language | TypeScript (strict mode) |
+| Styling | Tailwind CSS + shadcn/ui |
+| Architecture | Feature-Sliced Design (FSD) |
+| Database | PostgreSQL (Supabase) |
+| ORM | Prisma |
+| Payments | Stripe Checkout + Webhooks |
+| Storage | Supabase Storage |
+| Deployment | Vercel |
+
+---
+
+## Project Architecture
+
+This project follows **Feature-Sliced Design (FSD)** methodology for scalable frontend architecture:
+
+```
+src/
+├── app/          # Next.js App Router (pages + API routes)
+├── widgets/      # Composite UI blocks (header, footer, grids)
+├── features/     # User interactions (cart, search, checkout)
+├── entities/     # Business entities (poster, purchase)
+└── shared/       # Reusable code (ui, lib, api, config)
+```
+
+---
+
+# 🛠️ Technical Documentation
+
+<details>
+<summary><strong>Click to expand setup instructions</strong></summary>
 
 ## Getting Started
 
@@ -24,14 +143,22 @@ A marketplace for selling digital art posters built with Next.js, TypeScript, Ta
 
 ### Installation
 
-1. Install dependencies:
+1. Clone the repository:
+
+```bash
+git clone https://github.com/yourusername/poster-marketplace.git
+cd poster-marketplace
+```
+
+2. Install dependencies:
 
 ```bash
 npm install
 ```
 
-2. Set up environment variables:
-   Create a `.env` file in the root directory with the following variables:
+3. Set up environment variables:
+
+Create a `.env` file in the root directory:
 
 ```env
 # Database
@@ -43,7 +170,7 @@ STRIPE_PUBLISHABLE_KEY="pk_test_..."
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="pk_test_..."
 STRIPE_WEBHOOK_SECRET="whsec_..."
 
-# Supabase (if using Supabase Storage)
+# Supabase
 NEXT_PUBLIC_SUPABASE_URL="https://your-project.supabase.co"
 NEXT_PUBLIC_SUPABASE_ANON_KEY="your-anon-key"
 SUPABASE_SERVICE_ROLE_KEY="your-service-role-key"
@@ -55,19 +182,20 @@ JWT_SECRET="your-secret-key-change-in-production"
 NEXT_PUBLIC_APP_URL="http://localhost:3000"
 ```
 
-3. Set up the database:
+4. Set up the database:
 
 ```bash
 npx prisma migrate dev
-```
-
-4. Generate Prisma Client:
-
-```bash
 npx prisma generate
 ```
 
-5. Run the development server:
+5. Seed the database (optional):
+
+```bash
+npx prisma db seed
+```
+
+6. Run the development server:
 
 ```bash
 npm run dev
@@ -75,74 +203,71 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000) to see the app.
 
-## Project Structure
+---
 
-This project follows Feature-Sliced Design (FSD) architecture:
+## Stripe Webhook Setup
 
-```
-src/
-├── app/                    # Next.js App Router (pages + API routes)
-├── widgets/                # Composite UI blocks (header, footer, grids)
-├── features/               # User interactions (purchase, download)
-├── entities/               # Business entities (poster, purchase)
-└── shared/                 # Reusable infrastructure
-    ├── ui/                 # shadcn components
-    ├── lib/                # utilities, prisma, stripe
-    ├── api/                # fetch helpers
-    └── config/             # env, constants
-```
+For local development:
 
-## Development Phases
+1. Install [Stripe CLI](https://stripe.com/docs/stripe-cli)
 
-- [X] Phase 0: Setup
-- [X] Phase 1: Static UI
-- [X] Phase 2: Database Integration
-- [X] Phase 3: Stripe Checkout
-- [X] Phase 4: Webhooks & Delivery
-- [X] Phase 5: Search
-- [X] Phase 6: Shopping Cart
-- [X] Phase 7: Admin Panel
-- [X] Phase 8: Polish & Deploy
+2. Forward webhooks to localhost:
 
-## Webhook Setup (Phase 4)
-
-For local development with Stripe webhooks:
-
-1. Install Stripe CLI: https://stripe.com/docs/stripe-cli
-
-2. Login and forward webhooks:
 ```bash
 stripe login
 stripe listen --forward-to localhost:3000/api/webhook
 ```
 
-3. Copy the webhook signing secret and add it to `.env`:
+3. Copy the webhook signing secret to `.env`:
+
 ```env
 STRIPE_WEBHOOK_SECRET=whsec_...
 ```
 
-4. Complete a test purchase using test card `4242 4242 4242 4242`
+4. Test with card number: `4242 4242 4242 4242`
 
-For detailed setup instructions, see [docs/PHASE4_SETUP.md](docs/PHASE4_SETUP.md)
+---
 
-## Admin Panel (Phase 7)
+## Admin Panel
 
-Access the admin panel at [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
+Access: [http://localhost:3000/admin/login](http://localhost:3000/admin/login)
 
 **Default Credentials:**
 - Email: `admin@postermart.com`
 - Password: `admin123`
 
-**Features:**
+**Capabilities:**
 - Dashboard with sales statistics
-- Product management (CRUD operations)
-- Image and file uploads to Supabase Storage
-- Order management and tracking
-- Secure JWT-based authentication
+- Product CRUD operations
+- Image/file uploads to Supabase Storage
+- Order management
+- JWT-based authentication
 - Route protection middleware
 
-For detailed documentation, see [docs/PHASE7_ADMIN_PANEL.md](docs/PHASE7_ADMIN_PANEL.md)
+---
+
+## Development Phases
+
+- [x] Phase 0: Project Setup
+- [x] Phase 1: Static UI
+- [x] Phase 2: Database Integration
+- [x] Phase 3: Stripe Checkout
+- [x] Phase 4: Webhooks & Delivery
+- [x] Phase 5: Search
+- [x] Phase 6: Shopping Cart
+- [x] Phase 7: Admin Panel
+- [x] Phase 8: Polish & Deploy
+
+</details>
+
+---
 
 ## License
 
 ISC
+
+---
+
+<p align="center">
+  Built with ☕ by <a href="https://github.com/Majero-Ice">Majero</a>
+</p>
