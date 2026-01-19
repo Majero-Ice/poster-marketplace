@@ -143,41 +143,6 @@ Access the admin panel at [http://localhost:3000/admin/login](http://localhost:3
 
 For detailed documentation, see [docs/PHASE7_ADMIN_PANEL.md](docs/PHASE7_ADMIN_PANEL.md)
 
-## Shopping Cart (Phase 6)
-
-- Add multiple items to cart
-- Adjust quantities
-- Remove items
-- Persistent cart (localStorage)
-- Checkout all items at once
-- Multiple download links after purchase
-
-For detailed documentation, see [docs/PHASE6_SHOPPING_CART.md](docs/PHASE6_SHOPPING_CART.md)
-
-## Deployment
-
-For production deployment instructions, see [docs/DEPLOYMENT.md](docs/DEPLOYMENT.md)
-
-**Quick Deploy to Vercel:**
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/Majero-Ice/poster-marketplace)
-
-After deployment:
-1. Configure environment variables in Vercel dashboard
-2. Run database migrations
-3. Setup Stripe webhook endpoint
-4. Configure Supabase storage bucket
-
-## Production Checklist
-
-- [X] Loading states and skeletons
-- [X] Error boundaries and error handling
-- [X] Responsive design (mobile, tablet, desktop)
-- [X] SEO metadata for all pages
-- [ ] Deploy to Vercel
-- [ ] Configure production Stripe webhook
-- [ ] Test production flow end-to-end
-
 ## License
 
 ISC
