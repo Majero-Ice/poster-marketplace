@@ -12,7 +12,7 @@ A modern e-commerce platform for selling digital art posters. Users can browse, 
 
 <!-- TODO: Replace with your deployed URL -->
 <p align="center">
-  <a href="https://your-demo-url.vercel.app">
+  <a href="https://poster-marketplace.vercel.app/">
     <img src="https://img.shields.io/badge/Live%20Demo-Visit%20Site-blue?style=for-the-badge" alt="Live Demo" />
   </a>
 </p>
